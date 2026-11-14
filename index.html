@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An educational job search user interface prototype inspired by SEEK.">
+  <title>JobPath | Find your next opportunity</title>
+  <!-- CSS Grid handles page layout; no external framework is required. -->
+<link rel="stylesheet" href="styles.css">
+  
+</head>
+<body>
+  <a class="skip-link" href="#results">Skip to job results</a>
+  <!-- Site header: brand and accessible primary navigation. -->
+<header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="JobPath home"><span class="brand-mark" aria-hidden="true">↗</span>jobpath<span class="brand-dot">.</span></a>
+      <button type="button" class="mobile-menu-toggle" id="menuToggle" aria-controls="mainNav" aria-expanded="false">☰ <span>Menu</span></button>
+      <nav id="mainNav" class="main-nav" aria-label="Main navigation"><a class="active" href="#results" aria-current="page">Find jobs</a><a href="#saved" id="savedNav">Saved jobs <span id="savedCount" class="nav-count">0</span></a><a href="#about">About</a></nav>
+      <div class="header-right"><span class="demo-label">STUDENT DEMO</span><span class="avatar" aria-label="Demo account">JD</span></div>
+    </div>
+  </header>
+  <!-- Main landmark: job search, filters, results and saved jobs. -->
+<main id="top">
+    <!-- Search hero: labelled inputs support keyboard and screen-reader users. -->
+<section class="hero" aria-labelledby="heroTitle"><div class="hero-inner"><div class="eyebrow"><span class="status-dot"></span> YOUR CAREER, MADE CLEARER</div><h1 id="heroTitle">Find work that <em>works for you.</em></h1><p>Explore opportunities with transparent salaries, smarter filters and an easier way to compare what matters.</p><form id="searchForm" class="search-form" role="search"><label class="field"><span>What</span><input id="keyword" type="search" placeholder="Job title, skill or company" autocomplete="off"></label><label class="field"><span>Where</span><input id="location" type="search" placeholder="Suburb or city" autocomplete="off"></label><button class="primary-button" type="submit">Search jobs <span aria-hidden="true">→</span></button></form><p id="searchFeedback" class="form-feedback" role="alert" hidden></p><div class="hero-hint"><span class="hint-label">POPULAR SEARCHES</span><button class="hint-chip" type="button" data-suggestion="Nursing">Nursing</button><button class="hint-chip" type="button" data-suggestion="IT support">IT support</button><button class="hint-chip" type="button" data-suggestion="UX design">UX design</button><button class="hint-chip" type="button" data-suggestion="Remote work">Remote work</button></div></div></section>
+    <!-- Search workspace: aside for filters, results for matching jobs. -->
+<section class="workspace" aria-label="Job search workspace">
+      <div class="workspace-head"><div><div class="section-kicker">CURATED FOR YOUR SEARCH</div><h2>Find your next opportunity <span class="heading-accent">↗</span></h2><p>Browse, compare and save roles that match your goals.</p></div><button type="button" id="filterToggle" class="outline-button filter-toggle" aria-expanded="false" aria-controls="filters">☷ Filters</button></div>
+      <div class="content-grid">
+        <aside class="filters" id="filters" aria-label="Job filters"><div class="filter-header"><h3>Filter results</h3><button type="button" class="text-button" id="clearFilters">Clear all</button></div>
+          <fieldset><legend>Employment type</legend><label class="check-option"><input type="checkbox" name="type" value="Full-time"> Full-time</label><label class="check-option"><input type="checkbox" name="type" value="Part-time"> Part-time</label><label class="check-option"><input type="checkbox" name="type" value="Casual"> Casual</label><label class="check-option"><input type="checkbox" name="type" value="Contract"> Contract</label></fieldset>
+          <fieldset><legend>Minimum annual salary</legend><label class="range-label" for="salary">At least <strong id="salaryValue">Any salary</strong></label><input type="range" id="salary" min="0" max="150000" step="10000" value="0"><div class="range-ends"><span>Any</span><span>$150k+</span></div></fieldset>
+          <details class="advanced" id="advancedFilters"><summary>Advanced filters <span aria-hidden="true">⌄</span></summary><fieldset><legend>Work arrangement</legend><label class="check-option"><input type="checkbox" name="mode" value="Remote"> Remote</label><label class="check-option"><input type="checkbox" name="mode" value="Hybrid"> Hybrid</label><label class="check-option"><input type="checkbox" name="mode" value="On-site"> On-site</label></fieldset><fieldset><legend>Job category</legend><label class="check-option"><input type="checkbox" name="category" value="Healthcare"> Healthcare</label><label class="check-option"><input type="checkbox" name="category" value="Technology"> Technology</label><label class="check-option"><input type="checkbox" name="category" value="Design"> Design</label><label class="check-option"><input type="checkbox" name="category" value="Administration"> Administration</label></fieldset></details>
+          <div class="filter-note">Results update as you choose filters. Listings are fictional and for demonstration only.</div>
+        </aside>
+        <div class="results-column" id="results"><div class="results-toolbar"><p id="resultCount" aria-live="polite" aria-atomic="true"></p><label class="sort-label" for="sort">Sort by <select id="sort"><option value="relevant">Most relevant</option><option value="salary">Highest salary</option><option value="newest">Newest</option></select></label></div><div id="jobList" class="job-list" aria-label="Matching job listings"></div><p id="actionStatus" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p><div id="emptyState" class="empty-state" hidden><div aria-hidden="true">⌕</div><h3>No matching jobs</h3><p>Try removing a filter or using a different search term.</p><button type="button" id="emptyReset" class="outline-button">Clear filters</button></div></div>
+      </div>
+    </section>
+    <!-- Saved jobs: populated by JavaScript; no user data leaves the browser. -->
+    <section id="saved" class="saved-section"><div class="section-kicker">KEEP TRACK</div><h2>Saved opportunities</h2><p id="savedSummary">Save jobs to review them later.</p><div id="savedList" class="saved-list" aria-label="Saved job listings"></div></section>
+    <!-- About section: links the interface to Assessment 1 usability findings. -->
+    <section id="about" class="about-section"><div><div class="section-kicker">DESIGNED WITH PURPOSE</div><h2>Better job searching, by design.</h2></div><p>This educational prototype responds to UX issues identified in a SEEK website analysis: unclear salary and work-type information, crowded filters, and difficulty comparing jobs. It prioritises job seekers while helping employers present clearer vacancies. No real applications or personal data are collected.</p></section>
+  </main>
+  <div id="compareBar" class="compare-bar" hidden><span id="compareSummary">0 jobs selected</span><div><button type="button" id="clearCompare" class="compare-clear">Clear</button><button type="button" id="openCompare" class="primary-button" disabled>Compare jobs</button></div></div>
+  <!-- Native comparison dialog: accessible modal with keyboard Escape support. -->
+<dialog id="compareDialog" aria-labelledby="compareTitle"><div class="dialog-top"><div><div class="section-kicker">SIDE-BY-SIDE VIEW</div><h2 id="compareTitle">Compare opportunities</h2></div><button type="button" id="closeCompare" class="icon-button" aria-label="Close comparison">✕</button></div><div id="comparisonContent" class="comparison-content"></div><div class="dialog-footer"><button type="button" class="outline-button" id="dialogDone">Done</button></div></dialog>
+  <!-- Job details modal: opens from a selected job card; no external navigation. -->
+  <dialog id="detailsDialog" aria-labelledby="detailsTitle" class="details-dialog">
+    <div class="dialog-top"><div><div class="section-kicker">ROLE OVERVIEW</div><h2 id="detailsTitle">Job details</h2></div><button type="button" id="closeDetails" class="icon-button" aria-label="Close job details">✕</button></div>
+    <div id="detailsContent"></div>
+    <div class="dialog-footer"><button type="button" id="detailsDone" class="outline-button">Back to results</button></div>
+  </dialog>
+  <div id="toast" class="toast-message" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+  <footer><p>JobPath is an original educational UI prototype inspired by a SEEK usability study. Not affiliated with SEEK. Fictional job listings.</p><p>UED100 · Assessment 2 · Final assessment candidate</p></footer>
+<script src="script.js" defer></script>
+</body>
+</html>
